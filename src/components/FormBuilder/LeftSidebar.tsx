@@ -41,7 +41,7 @@ const LeftSidebar: FunctionComponent<LeftSidebarProps> = (props) => {
             (control) => control.category === "text-elements"
           ).map((control, ind) => {
             return (
-              <div className="col-6" key={control.controlName}>
+              <div className="col-12" key={control.controlName}>
                 <ControlDragComponent
                   key={control.controlName}
                   item={control}
@@ -59,7 +59,7 @@ const LeftSidebar: FunctionComponent<LeftSidebarProps> = (props) => {
             (control) => control.category === "date-elements"
           ).map((control, ind) => {
             return (
-              <div className="col-6" key={control.controlName}>
+              <div className="col-12" key={control.controlName}>
                 <ControlDragComponent
                   key={control.controlName}
                   item={control}
@@ -77,7 +77,7 @@ const LeftSidebar: FunctionComponent<LeftSidebarProps> = (props) => {
             (control) => control.category === "other-elements"
           ).map((control, ind) => {
             return (
-              <div className="col-6" key={control.controlName}>
+              <div className="col-12" key={control.controlName}>
                 <ControlDragComponent
                   key={control.controlName}
                   item={control}
@@ -95,7 +95,7 @@ const LeftSidebar: FunctionComponent<LeftSidebarProps> = (props) => {
             (control) => control.category === "media-elements"
           ).map((control, ind) => {
             return (
-              <div className="col-6" key={control.controlName}>
+              <div className="col-12" key={control.controlName}>
                 <ControlDragComponent
                   key={control.controlName}
                   item={control}

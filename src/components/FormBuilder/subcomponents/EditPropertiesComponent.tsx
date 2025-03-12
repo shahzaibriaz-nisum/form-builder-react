@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import ManageItemsListComponent from './ManageItemsListComponent';
 import { FormLayoutComponentChildrenType, FormLayoutComponentContainerType, FormLayoutCoponentChildrenItemsType } from '../../../types/FormTemplateTypes';
 import { Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
-import { FormControlNames, FormItemTypes } from '../../../utils/formBuilderUtils';
+import { FormControlNames, FormItemTypes, ControlItemType } from '../../../utils/formBuilderUtils';
 import { FormLayoutComponentsType } from '../../../types/FormTemplateTypes';
 import _ from "lodash";
 import useModalStrip from '../../../global-hooks/useModalStrip';
@@ -158,6 +158,7 @@ const EditPropertiesComponent: FC<EditPropertiesComponentProps> = (props)=> {
   return (
     <>
       {selectedControl ? (
+        // FIXME: EDIT CONTAINER PROPERTIES
         <>
           {containerUpdatedItem.itemType === FormItemTypes.CONTAINER ? (
             <>
@@ -207,58 +208,74 @@ const EditPropertiesComponent: FC<EditPropertiesComponentProps> = (props)=> {
             </>
           ) : (
             <>
+            {/* Edit Field Properties */}
               <div className="main-form">
                 <form onSubmit={onFormSubmit} style={{ minWidth: "100%" }}>
                   <div className="main-form-title">Edit Field Properties</div>
+                  {/* Common field for all types */}
+                  <div>
+                    <TextField
+                      label="Size - XS"
+                      name="xs"
+                      type="number"
+                      value={childUpdatedItem.xs || ''}
+                      onChange={handleChange}
+                      style={textboxStyle}
+                      inputProps={{
+                        max: 12,
+                        min: 1
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <TextField
+                      label="Type"
+                      name="type"
+                      value={childUpdatedItem.type || ''}
+                      style={textboxStyle}
+                      disabled
+                    />
+                  </div>
+
+                  {/* Label field for all control types */}
                   <div>
                     <TextField
                       label="Field Label Name"
-                      name="labelName"
-                      value={childUpdatedItem.labelName}
+                      name="label"
+                      value={childUpdatedItem.label || ''}
                       onChange={handleChange}
                       style={textboxStyle}
+                      required
                     />
                   </div>
-                  {/* {childUpdatedItem.controlName === FormControlNames.INPUTTEXTFIELD ? <>
-            <div>
-              <FormControl style={{minWidth:'100%'}}>
-                <InputLabel>Prefill Data With</InputLabel>
-                <Select
-                >
-                  <MenuItem value={'ConsignmentId'}>Consignment Id</MenuItem>
-                  <MenuItem value={'Weight'}>Weight</MenuItem>            
-                </Select>
-              </FormControl>
-            </div>
-          </>: null} */}
-                  {childUpdatedItem.controlName ===
-                    FormControlNames.INPUTTEXTFIELD ||
-                  childUpdatedItem.controlName === FormControlNames.INPUTMULTILINE ||
-                  childUpdatedItem.controlName === FormControlNames.CHECKBOX ? (
+
+                  {/* Key Value field only for Label and Input types */}
+                  {(childUpdatedItem.type === ControlItemType.LABEL || childUpdatedItem.type === ControlItemType.INPUT) && (
+                    <div>
+                      <TextField
+                        label="Key Value"
+                        name="keyValue"
+                        value={childUpdatedItem.keyValue || ''}
+                        onChange={handleChange}
+                        style={textboxStyle}
+                      />
+                    </div>
+                  )}
+
+                  {/* Fields only for Input type */}
+                  {childUpdatedItem.type === ControlItemType.INPUT && (
                     <>
                       <div>
                         <TextField
-                          label="Field Placeholder"
-                          name="placeholder"
-                          value={childUpdatedItem.placeholder}
+                          label="Default"
+                          name="default"
+                          value={childUpdatedItem.default || ''}
                           onChange={handleChange}
                           style={textboxStyle}
                         />
                       </div>
                     </>
-                  ) : (
-                    ""
                   )}
-                  <div>
-                    <TextField
-                      label="Field Description"
-                      name="description"
-                      value={childUpdatedItem.description}
-                      onChange={handleChange}
-                      multiline
-                      style={textboxStyle}
-                    />
-                  </div>
                   <div className="m-t-20 p-l-0">
                     <FormControlLabel
                       control={

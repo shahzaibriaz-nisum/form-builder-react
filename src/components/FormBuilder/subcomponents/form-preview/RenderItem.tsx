@@ -24,7 +24,6 @@ const RenderItem: FC<RenderItemProps> = (props)=> {
           <TextField
             type={item.dataType}
             fullWidth={true}
-            placeholder={item.placeholder}
             variant="outlined"
           />
         </>
@@ -38,7 +37,6 @@ const RenderItem: FC<RenderItemProps> = (props)=> {
             fullWidth={true}
             multiline={true}
             minRows={item.rows}
-            placeholder={item.placeholder}
             variant="outlined"
           />
         </>
@@ -53,7 +51,7 @@ const RenderItem: FC<RenderItemProps> = (props)=> {
                 />
               }
               style={{ marginLeft: "0px" }}
-              label={item.placeholder}
+              label={item.label}
             />
           </div>
         </>
@@ -63,7 +61,7 @@ const RenderItem: FC<RenderItemProps> = (props)=> {
       return (
         <>
           <FormControl>
-            {/* <FormLabel>{item.labelName + (item.required?" *":"")}</FormLabel> */}
+            {/* <FormLabel>{item.label + (item.required?" *":"")}</FormLabel> */}
             <RadioGroup name={item.controlName + item.id} row>
               {item.items?.map((i) => (
                 <FormControlLabel
@@ -82,7 +80,7 @@ const RenderItem: FC<RenderItemProps> = (props)=> {
       return (
         <>
           <FormControl style={{ minWidth: "100%" }}>
-            {/* <InputLabel>{item.labelName + (item.required?" *":"")}</InputLabel> */}
+            {/* <InputLabel>{item.label + (item.required?" *":"")}</InputLabel> */}
             <Select
               // style={{minWidth: '100%'}}
               variant="outlined"

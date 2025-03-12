@@ -34,8 +34,8 @@ interface FormLayoutComponentContainerType{
 interface FormLayoutComponentChildrenType{
   controlName: string,
   displayText: string,
-  description: string,
-  labelName: string,
+  // description: string,
+  label: string,
   itemType: string,
   icon: string,
   required: boolean,
@@ -44,10 +44,15 @@ interface FormLayoutComponentChildrenType{
   index?: number,
   id: string,
   containerId: string,
-  placeholder?: string,
+  // placeholder?: string,
   rows?: number,
-  dataType?: string
-  position?: number
+  dataType?: string,
+  position?: number,
+  xs?: number,
+  key?: string,
+  keyValue?: string,
+  type?: string,
+  default?: string
 }
 
 interface FormLayoutCoponentChildrenItemsType{

@@ -15,12 +15,25 @@ const dateFormat = 'yyyy, MMM dd';
 
 const renderItem = (item: FormLayoutComponentChildrenType)=>{
   switch(item.controlName){
+    case FormControlNames.HEADINGFIELD:
+      return <>
+        <div style={{ fontSize: '1.5rem', fontWeight: 500, color: 'rgba(0, 0, 0, 0.87)', marginBottom: '0.5rem' }}>
+          {item.label}
+        </div>
+      </>
+
+    case FormControlNames.LABELFIELD:
+      return <>
+        <div style={{ fontSize: '1rem', color: 'rgba(0, 0, 0, 0.87)' }}>
+          {item.label}
+        </div>
+      </>
+    
     case FormControlNames.INPUTTEXTFIELD:
       return <>
         <TextField 
         type={item.dataType}
         fullWidth={true}
-        placeholder={item.placeholder}
         disabled
         variant='outlined'
         />
@@ -33,7 +46,6 @@ const renderItem = (item: FormLayoutComponentChildrenType)=>{
         fullWidth={true}
         multiline={true}
         minRows={item.rows}
-        placeholder={item.placeholder}
         disabled
         variant='outlined'
         />
@@ -46,7 +58,7 @@ const renderItem = (item: FormLayoutComponentChildrenType)=>{
             disabled
           />}
           style={{marginLeft: '0px'}}
-          label={item.placeholder}
+          label={item.label}
         />
       </div>
       </>
@@ -54,7 +66,7 @@ const renderItem = (item: FormLayoutComponentChildrenType)=>{
     case FormControlNames.RADIOGROUP:
       return <>
         <FormControl>
-          {/* <FormLabel>{item.labelName + (item.required?" *":"")}</FormLabel> */}
+          {/* <FormLabel>{item.label + (item.required?" *":"")}</FormLabel> */}
           <RadioGroup name={item.controlName+item.id} row>
             {item.items?.map((i)=>(
               <FormControlLabel value={i.value} key={i.value} control={<Radio />} label={i.label} />
@@ -66,7 +78,7 @@ const renderItem = (item: FormLayoutComponentChildrenType)=>{
     case FormControlNames.SELECTDROPDOWN:
       return <>
         <FormControl style={{minWidth:'100%'}}>
-          {/* <InputLabel>{item.labelName + (item.required?" *":"")}</InputLabel> */}
+          {/* <InputLabel>{item.label + (item.required?" *":"")}</InputLabel> */}
           <Select
           // style={{minWidth: '100%'}}
           variant='outlined'
@@ -281,12 +293,11 @@ function ControlViewComponent(props: ControlViewComponentProps) {
 
   const opacity = isDragging ? 0 : 1
   drag(drop(ref))
-
   return ( <>
-    <div ref={ref} className='row w-100 align-items-stretch justify-content-end' onClick={()=>selectControl(item)} style={{...wrapperStyle,opacity}}>
-      <div className='col-12 p-20'>
+    <div ref={ref} className={`align-items-stretch justify-content-end col-lg-${item.xs}`} onClick={()=>selectControl(item)} style={{...wrapperStyle,opacity}}>
+      <div className='p-20'>
         <div className='d-flex align-items-center justify-content-between'>
-          <h5>{item.labelName + (item.required?" *":"")}</h5>
+          <h5>{item.label + (item.required?" *":"")}</h5>
           <div className='control-actions'>
             <span style={{cursor:'grab'}}>
               <i className='fa fa-ellipsis-v'></i>

@@ -151,7 +151,7 @@ const DropContainerComponent: FunctionComponent<DropContainerComponentProps> = (
                     </div>
                   </>
                 ) : (
-                  <>
+                  <div className='row w-100 py-3'>
                     {childrenComponents?.map((component, ind) => {
                       return (
                         <ControlViewComponent
@@ -188,7 +188,7 @@ const DropContainerComponent: FunctionComponent<DropContainerComponentProps> = (
                         />
                       );
                     })}
-                  </>
+                  </div>
                 )}
               </div>
               {/* <div className='container-actions' style={{backgroundColor: borderColor}}>

@@ -54,7 +54,7 @@ const StepperFormPreview: FC<StepperFormPreviewProps> = (props)=> {
 
                   {component.children.map((child, ind) => (
                     <div key={child.id} className="my-4">
-                      <h5>{child.labelName + (child.required ? " *" : "")}</h5>
+                      <h5>{child.label + (child.required ? " *" : "")}</h5>
                       {child.description !== "" ? (
                         <>
                           <div className="mt-1">
